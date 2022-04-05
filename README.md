@@ -17,7 +17,7 @@ Go言語の`chromedp`というライブラリで作成しました。`chromedp`�
 1. プロジェクトごとダウンロードする
 2. inputフォルダの「シリアルコード.txt」にシリアルコードを記載する(１シリアルコードごとに改行)
 3. inputフォルダの「都道府県.txt」に入力したい都道府県を記載する(1行目に記載すること)
-4. yanoSetouchiPrUnitHonoka.exeをダブルクリックで実行
+4. yanoSetouchiPrUnitHonoka.exeをダブルクリックで実行 ※Macの人はyanoSetouchiPrUnitHonoka
 
 ### 動作確認済み環境
 端末； MacBook Air (M1, 2020)  
