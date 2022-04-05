@@ -228,7 +228,7 @@ func openFile(fileName string) *os.File {
 }
 
 /*********************************
-書き込み(月)
+書き込み(追記)
 *********************************/
 func writeFile(serial string) {
 
