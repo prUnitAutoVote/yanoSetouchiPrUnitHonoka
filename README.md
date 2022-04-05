@@ -20,7 +20,7 @@ Go言語の`chromedp`というライブラリで作成しました。`chromedp`�
 4. yanoSetouchiPrUnitHonoka.exeをダブルクリックで実行 ※Macの人はyanoSetouchiPrUnitHonoka
 
 ### 動作確認済み環境
-端末； MacBook Air (M1, 2020)  
+端末： MacBook Air (M1, 2020)  
 OSバージョン: macOS Monterey version 12.2.1  
 プロセッサ: Apple M1  
 Chromeバージョン: 99.0.4844.83（Official Build） （arm64）
