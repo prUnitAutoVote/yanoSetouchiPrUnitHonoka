@@ -95,7 +95,7 @@ func main() {
 	defer cancel()
 	ctx, cancel := chromedp.NewContext(allocCtx, chromedp.WithLogf(log.Printf))
 	defer cancel()
-	ctx, cancel = context.WithTimeout(ctx, 50*time.Second)
+	ctx, cancel = context.WithTimeout(ctx, 60*time.Minute)
 	defer cancel()
 
 	/*********************************
@@ -104,6 +104,7 @@ func main() {
 	serials := getSerials()
 	for _, serial := range serials {
 		if strings.TrimSpace(serial) != "" {
+			fmt.Println(serial)
 			// 初期画面
 			init_page_tasks := chromedp.Tasks{
 				// 投票ページ遷移
@@ -111,9 +112,6 @@ func main() {
 				chromedp.Sleep(500 * time.Millisecond),
 			}
 			err := chromedp.Run(ctx, init_page_tasks)
-			if err != nil {
-				log.Fatal(err)
-			}
 
 			prefecture := getPrefecture()
 
@@ -137,7 +135,7 @@ func main() {
 				chromedp.FullScreenshot(&buf, SCREENSHOT_QUALITY),
 				chromedp.Sleep(1 * time.Second),
 				chromedp.Click(BUTTON_SUBMIT, chromedp.BySearch),
-				chromedp.Sleep(1 * time.Second),
+				chromedp.Sleep(2 * time.Second),
 			}
 			err = chromedp.Run(ctx, confirm_tasks)
 			if err != nil {
