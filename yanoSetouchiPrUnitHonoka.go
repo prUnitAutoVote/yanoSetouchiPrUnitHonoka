@@ -95,7 +95,7 @@ func main() {
 	defer cancel()
 	ctx, cancel := chromedp.NewContext(allocCtx, chromedp.WithLogf(log.Printf))
 	defer cancel()
-	ctx, cancel = context.WithTimeout(ctx, 60*time.Minute)
+	ctx, cancel = context.WithTimeout(ctx, 24*time.Hour)
 	defer cancel()
 
 	/*********************************
