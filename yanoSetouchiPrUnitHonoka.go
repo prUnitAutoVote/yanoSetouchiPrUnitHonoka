@@ -135,7 +135,7 @@ func main() {
 				chromedp.FullScreenshot(&buf, SCREENSHOT_QUALITY),
 				chromedp.Sleep(1 * time.Second),
 				chromedp.Click(BUTTON_SUBMIT, chromedp.BySearch),
-				chromedp.Sleep(2 * time.Second),
+				chromedp.Sleep(1 * time.Second),
 			}
 			err = chromedp.Run(ctx, confirm_tasks)
 			if err != nil {
