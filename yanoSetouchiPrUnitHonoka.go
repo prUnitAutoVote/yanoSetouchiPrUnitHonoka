@@ -59,7 +59,7 @@ func main() {
 	serials := getSerials()
 	for _, serial := range serials {
 		if strings.TrimSpace(serial) != "" {
-			fmt.Println(serial)
+
 			// 初期画面
 			init_page_tasks := chromedp.Tasks{
 				// 投票ページ遷移
