@@ -17,9 +17,9 @@ import (
 const (
 	MAIN_PAGE               string = "https://krs.bz/kingrecords/m/b3t19ge"
 	INPUT_FIELD_SERIAL_CODE string = `//*[@id="e_7183"]`
-	DROPDOWN_YANO           string = `//*[@id="e_7184"]`
+	DROPDOWN_MEMBERS        string = `//*[@id="e_7184"]`
 	DROPDOWN_YANO_VALUE     string = `13`
-	DROPDOWN_KAIJO          string = `//*[@id="e_7196"]`
+	DROPDOWN_PREFECTURES    string = `//*[@id="e_7196"]`
 	NEXT_PAGE               string = `//*[@id="__send"]`
 	CONFIRM_TEXT            string = `/html/body/form/font[5]/font` // 確認画面に現れるテキスト
 	BUTTON_SUBMIT           string = `//*[@id="__commit"]`
@@ -119,8 +119,8 @@ func main() {
 			vote_tasks := chromedp.Tasks{
 				chromedp.WaitVisible(INPUT_FIELD_SERIAL_CODE),
 				chromedp.SendKeys(INPUT_FIELD_SERIAL_CODE, serial, chromedp.BySearch),
-				chromedp.SetValue(DROPDOWN_YANO, DROPDOWN_YANO_VALUE, chromedp.BySearch),
-				chromedp.SetValue(DROPDOWN_KAIJO, prefectures_cd[prefecture], chromedp.BySearch),
+				chromedp.SetValue(DROPDOWN_MEMBERS, DROPDOWN_YANO_VALUE, chromedp.BySearch),
+				chromedp.SetValue(DROPDOWN_PREFECTURES, prefectures_cd[prefecture], chromedp.BySearch),
 				chromedp.Click(NEXT_PAGE, chromedp.BySearch),
 			}
 			err = chromedp.Run(ctx, vote_tasks)
