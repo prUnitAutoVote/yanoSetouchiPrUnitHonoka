@@ -26,6 +26,9 @@ const (
 	SCREENSHOT_QUALITY      int    = 60 // スクショのクオリティ
 )
 
+// カレントパス
+var currentPath string = path.Dir(os.Args[0])
+
 var buf []byte
 
 func main() {
@@ -82,7 +85,6 @@ func main() {
 			}
 
 			// 確認画面
-			// 目視で確認するため1秒の待機
 			confirm_tasks := chromedp.Tasks{
 				chromedp.WaitVisible(CONFIRM_TEXT, chromedp.BySearch),
 				chromedp.FullScreenshot(&buf, SCREENSHOT_QUALITY),
@@ -94,7 +96,11 @@ func main() {
 			if err != nil {
 				log.Fatal(err)
 			}
-			if err := ioutil.WriteFile("screenshots/シリアルコード_"+serial+".jpg", buf, 0o644); err != nil {
+
+			if err := ioutil.WriteFile(
+				fmt.Sprintf(
+					"%s%s%s%s", currentPath, "/screenshots/シリアルコード_", serial, ".jpg"), buf, 0o644,
+			); err != nil {
 				log.Fatal(err)
 			}
 
@@ -131,7 +137,6 @@ func getPrefecture() string {
 	fp := openFile("input/都道府県.txt")
 	fs := readFileLineByLine(fp)
 
-	// IDとパスワードを取り出す
 	counter := 0
 	for fs.Scan() {
 		// 1行目が都道府県
@@ -211,18 +216,10 @@ func getPrefecture() string {
 *********************************/
 func openFile(fileName string) *os.File {
 
-	// カレントパスに移動
-	dir := path.Dir(os.Args[0])
-	os.Chdir(dir)
-
-	// カレントパス取得
-	filePath := new([]string)
-	pwd, _ := os.Getwd()
-	*filePath = append(*filePath, pwd+"/")
-	filePathStr := strings.Join(*filePath, "")
-
 	// ファイルを開く
-	f, err := os.Open(filePathStr + fileName)
+	f, err := os.Open(
+		fmt.Sprintf("%s%s%s", currentPath, "/", fileName),
+	)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -235,17 +232,11 @@ func openFile(fileName string) *os.File {
 *********************************/
 func writeFile(serial string) {
 
-	// カレントパスに移動
-	dir := path.Dir(os.Args[0])
-	os.Chdir(dir)
+	file, err := os.OpenFile(
+		fmt.Sprintf("%s%s%s", currentPath, "/", "使用済みシリアルコード.txt"),
+		os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666,
+	)
 
-	// カレントパス取得
-	filePath := new([]string)
-	pwd, _ := os.Getwd()
-	*filePath = append(*filePath, pwd+"/")
-	filePathStr := strings.Join(*filePath, "")
-
-	file, err := os.OpenFile(filePathStr+"使用済みシリアルコード.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
 		log.Fatal(err)
 	}
